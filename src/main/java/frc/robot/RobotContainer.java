@@ -10,15 +10,17 @@ import org.photonvision.PhotonCamera;
 import org.photonvision.targeting.PhotonPipelineResult;
 
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
-
+import edu.wpi.first.wpilibj.PS4Controller.Button;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.commands.AllignTarget;
+import frc.robot.commands.EncodeTest;
 // import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.DriverControls;
@@ -36,10 +38,13 @@ public class RobotContainer {
   public static AllignTarget m_AllignTarget;
  public static  DriveTrain m_driveTrain;
  public static DriverControls m_driverControls;
+ public static EncodeTest m_EncodeTest;
  public static PhotonCamera limeCamera;
 //  public static Arm m_arm; 
  public static  DigitalInput topLimit;
  public static  DigitalInput bottomLimit;
+ public static Encoder m_encoder;
+
 
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
@@ -48,10 +53,11 @@ public class RobotContainer {
     m_xboxController = new XboxController(Constants.XBOX_USB_NUM);
     m_driveTrain = new DriveTrain();
     m_AllignTarget = new AllignTarget();
+    m_EncodeTest = new EncodeTest();
     limeCamera = new PhotonCamera("limeCamera");
+    m_encoder = new Encoder(Constants.ENCODER_CHANNEL1, Constants.ENCODER_CHANNEL2);
     // m_arm = new Arm();
     
-    // topLimit = new DigitalInput(Constants.TOP_LIMIT_DIO);
     // bottomLimit = new DigitalInput(Constants.BOTTOM_LIMIT_DIO);
     // tankDrive();
     // arcadeDrive();
@@ -85,6 +91,11 @@ public class RobotContainer {
    {
     System.out.println("problem is " + e.getLocalizedMessage());
    }
+
+   Trigger extendButton = new JoystickButton(m_xboxController, 1);
+   JoystickButton testEncoderButton = new JoystickButton(m_xboxController, 2);
+   testEncoderButton.whileTrue(m_EncodeTest);
+
   }
 
 

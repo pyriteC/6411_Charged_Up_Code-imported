@@ -4,6 +4,8 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.DigitalSource;
+
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
  * constants. This class should not be used for any other purpose. All constants should be declared
@@ -30,4 +32,7 @@ public final class Constants {
     public static final String PRIMARY_JOYSTICK = "Left";
 
     public static final float DRIVE_TRAIN_RATIO = 1; //Cannot go above 1; this multiplies the trigger input on the controller to set a speed limit
+    public static final int ENCODER_CHANNEL = 0;
+    public static final DigitalSource ENCODER_CHANNEL2 = null;
+    public static final DigitalSource ENCODER_CHANNEL1 = null;
 }
